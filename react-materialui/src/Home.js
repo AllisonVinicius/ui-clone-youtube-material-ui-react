@@ -1,7 +1,13 @@
 import {
   AppBar,
   Button,
-  IconButton, makeStyles, Toolbar
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem, ListItemText,
+  makeStyles,
+  Toolbar
 } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Apps from '@material-ui/icons/Apps';
@@ -12,27 +18,38 @@ import React from 'react';
 
 
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
-      background: theme.palette.primary,
-      padding: theme.spacing(2),
       height: '100vh',
+    }, 
+      appBar: {
+        boxShadow: 'none',
+        zIndex: theme.zIndex.drawer + 1,
+      },
+      drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
+      },
+      drawerPaper: {
+        width: drawerWidth,
+      },
+      menuIcon:{
+        paddingRight: theme.spacing(5),
+        paddingLeft: theme.spacing(6),
       
     },
-    appBar: {
-      boxShadow: 'none',
+    logo: {
+      height: 25,
     },
     icons: {
-      paddingRight: theme.spacing(5)
-
+      paddingRight: theme.spacing(5),
     },
-
     grow: {
       flexGrow: 1,
-    }
+    },
   }));
 
-  
 function Home(){
     const classes = useStyles();
     return (
@@ -40,13 +57,15 @@ function Home(){
           <AppBar color='inherit' className={classes.appBar}>
             <Toolbar>
               <IconButton
-                edge='inherit'
-                className={classes.icons}
+                edge='start'
+                className={classes.menuIcon}
                 color='inherit'
                 aria-label='menu'
               >
               <MenuIcon />
               </IconButton>
+              
+              <img className={classes.logo} src="/images/preto.png" alt="logo" />
               <div className={classes.grow}/>
               <IconButton              
                 className={classes.icons}
@@ -75,6 +94,36 @@ function Home(){
               </Button>
             </Toolbar>
           </AppBar>
+          <Drawer
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            <Toolbar />
+            <div className={classes.drawerContainer}>
+              <List>
+                {['Inbox', 'Starred', 'Send Email'].map((text,index) => (
+                  <ListItem button key={text}>
+                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                    <ListItemText primary={text} />
+                  </ListItem>
+                  
+                ))}
+              </List>
+              <Divider />
+
+              <List>
+                {['All', 'trsh', 'spqan'].map((text,index) => (
+                  <ListItem button key={text}>
+                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                    <ListItemText primary={text} />
+                  </ListItem>
+                ))}
+              </List>
+            </div>
+          </Drawer>
         </div>
     )
 }
