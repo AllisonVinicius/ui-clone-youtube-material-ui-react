@@ -5,7 +5,9 @@ import {
   Drawer,
   IconButton,
   List,
-  ListItem, ListItemText,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   makeStyles,
   Toolbar
 } from '@material-ui/core';
@@ -28,16 +30,20 @@ const useStyles = makeStyles((theme) => ({
         zIndex: theme.zIndex.drawer + 1,
       },
       drawer: {
-        width: drawerWidth,
+        width: 240,
         flexShrink: 0,
       },
       drawerPaper: {
-        width: drawerWidth,
+        width: 240,
+        borderRight: 'none',
       },
       menuIcon:{
         paddingRight: theme.spacing(5),
         paddingLeft: theme.spacing(6),
       
+    },
+    listItemText:{
+      fontSize: 14,
     },
     logo: {
       height: 25,
@@ -104,24 +110,33 @@ function Home(){
             <Toolbar />
             <div className={classes.drawerContainer}>
               <List>
-                {['Inbox', 'Starred', 'Send Email'].map((text,index) => (
                   <ListItem button key={text}>
-                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                    <ListItemText primary={text} />
+                    <ListItemIcon>{<Icon />}</ListItemIcon>
+                    <ListItemText 
+                      classes={{primary: classes.listItemText}} 
+                      primary={'Inicio'} 
+                    />
                   </ListItem>
-                  
-                ))}
+              </List>
+              <List>
+                  <ListItem button key={text}>
+                    <ListItemIcon>{<Icon />}</ListItemIcon>
+                    <ListItemText 
+                      classes={{primary: classes.listItemText}} 
+                      primary={'Em alta'} 
+                    />
+                  </ListItem>
+              </List>
+              <List>
+                  <ListItem button key={text}>
+                    <ListItemIcon>{<Icon />}</ListItemIcon>
+                    <ListItemText 
+                      classes={{primary: classes.listItemText}} 
+                      primary={'inscrições'} 
+                    />
+                  </ListItem>
               </List>
               <Divider />
-
-              <List>
-                {['All', 'trsh', 'spqan'].map((text,index) => (
-                  <ListItem button key={text}>
-                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                    <ListItemText primary={text} />
-                  </ListItem>
-                ))}
-              </List>
             </div>
           </Drawer>
         </div>
